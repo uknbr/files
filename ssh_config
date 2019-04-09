@@ -1,0 +1,5 @@
+host ukn
+	hostname ukn.com.br
+	user ukn
+	port 2222
+	IdentityFile ~/Dropbox/Documents/PavanServer/ukn.com.br/ukn.pem
