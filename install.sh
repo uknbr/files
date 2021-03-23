@@ -1,3 +1,5 @@
-#!/bin/bash
-sudo apt-get update
-sudo apt-get install -y htop
+#!/bin/sh
+set -e
+# Script to setup VM
+echo "Update"
+exit 0
