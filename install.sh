@@ -1,5 +1,6 @@
 #!/bin/sh
 set -e
 # Script to setup VM
-echo "Update"
+sudo apt-get update
+sudo apt-get install -y nginx
 exit 0
