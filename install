@@ -14,27 +14,13 @@ sudo usermod -aG docker devops
 # Motd
 sudo chmod -x /etc/update-motd.d/*
 cat <<EOF >> /tmp/motd
-                ___
-                / ,-\      _ ___
-               | (  '\    |-|   |._
-        ___     )_ _/     | |   |  |
-       [___]   /  `\____  | |   |_.'
-       |  ^|  /  \_____/) |-|___|
-       |   | /    /   _:::_))_(___
-       |   |/'-._/_   |___________|
-       '-;_|\_____ `\ ||"""""""""||
-         | `######|_|_||         ||
-         \ ._  _,'{~-_}|         ||
-         _)   (   {-__}|         ||
-        /______`\ |_,__)         ||
 
-Please run below commands to start:
-
-docker run -dti --name challenge uknbr/devops-challenge
-docker exec -ti challenge sh
+---------------------------------------------------------
+ docker run -dti --name challenge uknbr/devops-challenge
+ docker exec -ti challenge sh
+---------------------------------------------------------
 
 Enjoy! =)
-
 
 EOF
 sudo cp -f /tmp/motd /etc/motd
