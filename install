@@ -1,8 +1,57 @@
 #!/bin/sh
-set -e
 # Script to setup VM
+set -e
+# Update
+export DEBIAN_FRONTEND=noninteractive
 sudo apt-get update
-sudo apt-get install -y nginx
+# Web
+sudo apt-get install -y nginx jq
+sudo sed -i 's/80/1111/g' /etc/nginx/sites-enabled/default
+sudo systemctl restart nginx
 # Docker
 curl -fsSL https://get.docker.com/ | sh
+sudo usermod -aG docker devops
+# Motd
+sudo chmod -x /etc/update-motd.d/*
+cat <<EOF >> /tmp/motd
+                _________________
+               /                /|
+              /                / |
+             /________________/ /|
+          ###|      ____      |//|
+         #   |     /   /|     |/.|
+        #  __|___ /   /.|     |  |_______________
+       #  /      /   //||     |  /              /|                  ___
+      #  /      /___// ||     | /              / |                 / \ \
+      # /______/!   || ||_____|/              /  |                /   \ \
+      #| . . .  !   || ||                    /  _________________/     \ \
+      #|  . .   !   || //      ________     /  /\________________  {   /  }
+      /|   .    !   ||//~~~~~~/   0000/    /  / / ______________  {   /  /
+     / |        !   |'/      /9  0000/    /  / / /             / {   /  /
+    / #\________!___|/      /9  0000/    /  / / /_____________/___  /  /
+   / #     /_____\/        /9  0000/    /  / / /_  /\_____________\/  /
+  / #                      ``^^^^^^    /   \ \ . ./ / ____________   /
+ +=#==================================/     \ \ ./ / /.  .  .  \ /  /
+ |#                                   |      \ \/ / /___________/  /
+ #                                    |_______\__/________________/
+ |                                    |               |  |  / /       
+ |                                    |               |  | / /       
+ |                                    |       ________|  |/ /________       
+ | D E V O P S                        |      /_______/    \_________/\       
+ | C H A L L E N G E                  |     /        /  /           \ )       
+ |                                    |    /OO^^^^^^/  / /^^^^^^^^^OO\)       
+ |                                    |            /  / /        
+ |                                    |           /  / /
+ |                                    |          /___\/
+ |                                    |           oo
+ |____________________________________|
+
+EOF
+sudo cp -f /tmp/motd /etc/motd
+# k8s
+sudo wget -q https://github.com/rancher/k3d/releases/download/v4.2.0/k3d-linux-amd64 -O /usr/local/bin/k3d
+sudo chmod +x /usr/local/bin/k3d
+sudo wget -q "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -O /usr/local/bin/kubectl
+sudo chmod +x /usr/local/bin/kubectl
+# End
 exit 0
