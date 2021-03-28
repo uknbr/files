@@ -15,10 +15,10 @@ sudo usermod -aG docker devops
 sudo chmod -x /etc/update-motd.d/*
 cat <<EOF >> /tmp/motd
 
----------------------------------------------------------
- docker run -dti --name challenge uknbr/devops-challenge
- docker exec -ti challenge sh
----------------------------------------------------------
+------------------------------------------------------------
+ docker run -dti --name challenge uknbr/devops-challenge:2
+ docker exec -ti challenge bash
+------------------------------------------------------------
 
 Enjoy! =)
 
