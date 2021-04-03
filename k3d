@@ -1,8 +1,0 @@
-#!/bin/sh
-# Script to setup k3d
-set -e
-docker run hello-world
-k3d cluster create devops-challenge --api-port 6550 -p "8080:80@loadbalancer" --agents 2
-k3d cluster list
-kubectl config use-context k3d-devops-challenge
-kubectl cluster-info

@@ -1,0 +1,80 @@
+#format = """
+#[└─>](bold green) $directory"""
+
+#format = '[└─>](bold white) [\[$time\]]($style) $username@$hostname:$directory '
+format = '[└─>](bold white) $cmd_duration $env_var \[ $time $jobs\] $status\($username@$hostname\):$directory \($git_branch $git_status\) '
+scan_timeout = 10
+add_newline = false
+
+[env_var]
+variable = "proxy_status"
+default = "proxy=N/A"
+format = "[$env_value]($style)"
+
+[jobs]
+symbol = "✦"
+threshold = 0
+
+[directory]
+truncation_length = 6
+truncation_symbol = "…/"
+format = "[$path]($style)[$read_only]($read_only_style)"
+style = "bold blue"
+read_only = " 🔒"
+
+[time]
+disabled = false
+format = "[$time]($style)"
+time_format = "%T"
+utc_time_offset = "-3"
+
+[hostname]
+ssh_only = false
+format =  "[$hostname](bold cyan)"
+trim_at = ".corp.amdocs.com"
+disabled = false
+
+[username]
+style_user = "green bold"
+style_root = "orange bold"
+format = "[$user]($style)"
+disabled = false
+show_always = true
+
+[status]
+format = "[$status]($style) "
+style = "bold red"
+map_symbol = true
+disabled = false
+
+[vagrant]
+format = "[$version](bold white) "
+detect_files = ["Vagrantfile"]
+
+[docker_context]
+format = "via [🐋 $context](blue bold)"
+
+[git_branch]
+format = "[$symbol$branch]($style)"
+symbol = "  "
+style = "bold purple"
+truncation_length = 16
+truncation_symbol = ""
+disabled = false
+
+[git_status]
+#format = "([\[$all_status$ahead_behind\]]($style) )"
+disabled = false
+
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[✗](bold red)"
+
+[cmd_duration]
+min_time = 500
+format = "[$duration](bold yellow)"
+show_milliseconds = true
+disabled = false
+
+[package]
+disabled = true
